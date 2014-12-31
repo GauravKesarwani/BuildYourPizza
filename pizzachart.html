@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<style>
+body{
+	background-color: white;
+}
+#heading {
+	margin-left: 400px;
+	margin-top: 50px;
+	color: black
+}
+#navbar{
+//	position:absolute;
+//	margin-top: 8px;
+	margin-left: 60px;
+//	border: 10px solid white;
+	width:1200px;
+}
+.breadcrumb {
+	list-style: none;
+	overflow: hidden;
+	font: 18px Helvetica, Arial, Sans-Serif;
+}
+
+.breadcrumb li {
+	float: left; //
+	width: 308px;
+}
+
+.breadcrumb li a {
+	color: white;
+	text-decoration: none;
+	padding: 10px 0 10px 65px;
+	background: brown;
+	background: hsla(0, 100%, 25%, 1);
+	position: relative;
+	display: block;
+	float: left;
+	width: 800px;
+}
+
+.breadcrumb li a:after {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 50px solid transparent;
+	/* Go big on the size, and let overflow hide */
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid hsla(0, 100%, 50%, 1);
+	position: absolute;
+	top: 50%;
+	margin-top: -50px;
+	left: 100%;
+	z-index: 2;
+}
+
+a.change:after {
+	
+}
+
+.breadcrumb li a:before {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 50px solid transparent;
+	border-bottom: 50px solid transparent;
+	border-left: 30px solid white;
+	position: absolute;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: 1px;
+	left: 100%;
+	z-index: 1;
+}
+
+.breadcrumb li:first-child a {
+	padding-left: 10px;
+	background: red;
+}
+
+.breadcrumb li:nth-child(2) a {
+	background: hsla(240, 100%, 50%, 1);
+}
+
+.breadcrumb li:nth-child(2) a:after {
+	border-left-color: hsla(240, 100%, 50%, 1);
+}
+
+.breadcrumb li:nth-child(3) a {
+	background: hsla(240, 100%, 50%, 1);
+}
+
+.breadcrumb li:nth-child(3) a:after {
+	border-left-color: hsla(240, 100%, 50%, 1);
+}
+
+.breadcrumb li:nth-child(4) a {
+	background: hsla(34, 85%, 65%, 1);
+}
+
+.breadcrumb li:nth-child(4) a:after {
+	border-left-color: hsla(34, 85%, 65%, 1);
+}
+
+.breadcrumb li:nth-child(5) a {
+	background: hsla(34, 85%, 75%, 1);
+}
+
+.breadcrumb li:nth-child(5) a:after {
+	border-left-color: hsla(34, 85%, 75%, 1);
+}
+
+.breadcrumb li:last-child a { //
+	background: transparent !important;
+	color: white; //
+	pointer-events: none;
+	cursor: default;
+}
+
+.button-style {
+	margin-top:80px;
+	margin-left: 480px
+}
+</style>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+
+<script type="text/javascript">
+	google.load('visualization', '1.1', {
+		'packages' : [ 'corechart' ]
+	});
+	function drawChart() {
+		var data1 =[];
+		data1 = JSON.parse(localStorage.getItem("toppings"));
+		dataTable1 = new google.visualization.DataTable();
+		dataTable1.addColumn('string', 'Topping');
+		dataTable1.addColumn('number', 'Value');
+
+		for (var i in data1){
+			console.log(data1[i]);
+			dataTable1.addRow(data1[i]);}
+
+		var options = {
+			//pieSliceText : 'none'
+		};
+		var container = document.getElementById('chart1');
+		var chart = new google.visualization.PieChart(container);
+		chart.draw(dataTable1, options);
+	};
+	
+	function drawDonutChart() {
+		var data1 =[];
+		data1 = JSON.parse(localStorage.getItem("toppings"));
+		dataTable2 = new google.visualization.DataTable();
+		dataTable2.addColumn('string', 'Topping');
+		dataTable2.addColumn('number', 'Value');
+
+		for (var i in data1){
+			console.log(data1[i]);
+			dataTable2.addRow(data1[i]);}
+
+		var options = {
+			//title: "Your Pizza",
+			pieHole: 0.4,
+		};
+		var container = document.getElementById('chart2');
+		var chart = new google.visualization.PieChart(container);
+		chart.draw(dataTable2, options);
+	};
+
+
+ </script>
+<title>Visualization</title>
+<script src="js/bootstrap.js"></script>
+</head>
+<body onload="drawChart();drawDonutChart();">
+	<div id="container">
+	<h3 id="heading">Build Your Own Pizza</h3>
+		<form>
+			<div class="row">
+				<ul class="breadcrumb" id="navbar">
+					<li><a href="#">DashBoard</a></li>
+				</ul>
+			</div>
+			<div class="container-fluid"
+				style="padding-left: 6%; padding-top: 1%">
+				<div class="col-md-12 row">
+					<div class="col-md-6" id="chart1"></div>
+					<div class="col-md-6" id="chart2"></div>
+				</div>
+			</div>
+		</form>
+		<a href="index.html"><button type="button" class="button-style" value="Home">Home</button></a>
+	</div>
+</body>
+</html>
