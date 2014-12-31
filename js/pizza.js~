@@ -1,4 +1,6 @@
 $('#build').click(function(){
+	console.log("Build Clicked");
+	
 	if(Modernizr.localstorage){
 		allVals =[];
 		$("input:checked").each(function(){
